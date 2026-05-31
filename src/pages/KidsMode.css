@@ -311,7 +311,12 @@
   .kids-map-header { padding: 10px 18px; }
   .map-header-button { min-height: 48px; padding: 8px 14px; }
   .kids-map-logo { padding: 7px 18px; font-size: 21px; }
-  .kids-map-world { height: calc(100dvh - 70px); min-height: 610px; }
+  .kids-map-world {
+    height: calc(100dvh - 70px);
+    min-height: 610px;
+    background-size: 100% 100%;
+    background-position: center;
+  }
 
   .map-stage-stone {
     width: 76px;
@@ -345,29 +350,32 @@
   .kids-map-goal-stone { width: 78px; height: 56px; font-size: 28px; }
   .kids-map-goal-board { left: -191px; }
 
-  .map-stage-green { left: 10% !important; top: 83% !important; }
-  .map-stage-cyan { left: 24% !important; top: 55% !important; }
-  .map-stage-blue { left: 29% !important; top: 22% !important; }
-  .map-stage-purple { left: 52% !important; top: 76% !important; }
-  .map-stage-orange { left: 69% !important; top: 61% !important; }
-  .map-stage-peach { left: 65% !important; top: 31% !important; }
+  .map-stage-green { left: 15% !important; top: 76% !important; }
+  .map-stage-cyan { left: 22% !important; top: 47% !important; }
+  .map-stage-blue { left: 24% !important; top: 19% !important; }
+  .map-stage-purple { left: 67% !important; top: 78% !important; }
+  .map-stage-orange { left: 72% !important; top: 53% !important; }
+  .map-stage-peach { left: 73% !important; top: 27% !important; }
+  .map-stage-purple .map-stage-board,
+  .map-stage-orange .map-stage-board,
   .map-stage-peach .map-stage-board { left: -194px; }
 
   .map-progress {
-    right: 12px;
+    right: auto;
+    left: 50%;
     bottom: 8px;
-    width: 360px;
-    grid-template-columns: minmax(155px, 1fr) 106px;
+    width: 310px;
+    grid-template-columns: 1fr;
     gap: 8px;
     padding: 7px 10px 16px;
     border-width: 3px;
+    transform: translateX(-50%);
   }
 
   .map-progress-meter strong { font-size: 12px; }
   .map-progress-track { height: 8px; margin: 3px 0; }
   .map-progress small { font-size: 9px; }
-  .map-progress-reward span { font-size: 21px; }
-  .map-progress-reward strong { font-size: 10px; }
+  .map-progress-reward { display: none; }
   .map-progress p { display: none; }
   .map-profile-switch { right: 10px; bottom: 3px; font-size: 10px; }
 }
