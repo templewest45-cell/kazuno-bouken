@@ -1,0 +1,88 @@
+/* Keep the first feeding activity usable inside a phone browser's short landscape viewport. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .s1-feed-page {
+    min-height: 100dvh !important;
+  }
+
+  .s1-feed-header {
+    gap: 8px !important;
+    padding: 4px 10px !important;
+  }
+
+  .s1-feed-header .btn {
+    min-height: 36px !important;
+    padding: 5px 9px !important;
+    font-size: 14px;
+  }
+
+  .s1-feed-question {
+    padding: 5px 10px 2px !important;
+    font-size: 17px !important;
+  }
+
+  .s1-feed-animals {
+    gap: 8px !important;
+    padding: 4px 10px !important;
+  }
+
+  .s1-feed-animal-card {
+    width: 112px !important;
+    gap: 2px !important;
+    padding: 4px 6px !important;
+    border-width: 2px !important;
+    border-radius: 14px !important;
+  }
+
+  .s1-feed-animal-image {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .s1-feed-count {
+    min-height: 48px !important;
+    gap: 7px !important;
+    padding: 3px 10px !important;
+  }
+
+  .s1-feed-count-image {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .s1-feed-count > div > div {
+    font-size: 15px !important;
+  }
+
+  .s1-feed-count > img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .s1-feed-tray {
+    gap: 5px !important;
+    margin: 0 auto 4px !important;
+    padding: 5px 14px !important;
+    border-radius: 14px !important;
+  }
+
+  .s1-feed-tray > div:not(:first-child) {
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  .s1-feed-tray img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .s1-feed-footer {
+    min-height: 48px;
+    padding: 4px 10px !important;
+  }
+
+  .s1-feed-footer .btn {
+    min-height: 40px;
+    padding: 7px 28px !important;
+    font-size: 16px !important;
+  }
+}

@@ -5,6 +5,7 @@ import { LogStore } from '../store/logStore';
 import { speak } from '../utils/speak';
 import { Settings } from '../store/settings';
 import CompletionActions from './CompletionActions';
+import './ActivityS1.css';
 
 const JP_NUMS = ['', 'いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな', 'はち', 'きゅう', 'じゅう'];
 
@@ -167,12 +168,13 @@ export default function ActivityS1() {
 
   return (
     <div
+      className="s1-feed-page"
       style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100vh', backgroundColor: '#FAFAFA' }}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       {/* ヘッダー */}
-      <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #EEE' }}>
+      <div className="s1-feed-header" style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #EEE' }}>
         <button className="btn" onClick={() => navigate('/kids/stage/1')} style={{ padding: '8px 16px', minHeight: '40px' }}>
           <ArrowLeft size={20} /> もどる
         </button>
@@ -186,6 +188,7 @@ export default function ActivityS1() {
 
       {/* 問いかけ */}
       <div
+        className="s1-feed-question"
         style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bold', padding: '20px 16px 8px', cursor: 'pointer',
           color: phase === 'done' ? '#2E7D32' : '#333' }}
         onClick={() => speak(phase === 'feed' ? 'どうぶつさんに ごはんを あげよう' : `ぜんぶで ${JP_NUMS[animalCount]}こ！`)}
@@ -196,12 +199,13 @@ export default function ActivityS1() {
       </div>
 
       {/* ── 動物エリア ── */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap', padding: '16px 24px' }}>
+      <div className="s1-feed-animals" style={{ display: 'flex', justifyContent: 'center', gap: '24px', flexWrap: 'wrap', padding: '16px 24px' }}>
         {animals.map(animal => {
           const fed = fedSet.has(animal.key);
           return (
             <div
               key={animal.key}
+              className="s1-feed-animal-card"
               data-animal-key={animal.key}
               onDragOver={e => { e.preventDefault(); }}
               onDrop={e => handleDrop(e, animal.key)}
@@ -218,6 +222,7 @@ export default function ActivityS1() {
               }}
             >
               <img
+                className="s1-feed-animal-image"
                 src={fed ? animal.happy : animal.open}
                 alt={animal.name}
                 draggable={false}
@@ -233,12 +238,12 @@ export default function ActivityS1() {
 
       {/* ── カウントアップ表示（counting / done フェーズ） ── */}
       {(phase === 'counting' || phase === 'done') && (
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px', padding: '16px 24px', minHeight: '80px' }}>
+        <div className="s1-feed-count" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '12px', padding: '16px 24px', minHeight: '80px' }}>
           {countDisplay.map((n, i) => (
             <div key={i} className="animate-pop-in" style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px',
             }}>
-              <img src={FOOD.src} alt="" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
+              <img className="s1-feed-count-image" src={FOOD.src} alt="" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
               <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#FF8F00' }}>{n}</div>
             </div>
           ))}
@@ -255,7 +260,7 @@ export default function ActivityS1() {
 
       {/* ── 食べ物トレイ ── */}
       {phase === 'feed' && (
-        <div style={{
+        <div className="s1-feed-tray" style={{
           margin: '0 auto 16px',
           padding: '20px 32px',
           backgroundColor: 'white',
@@ -303,7 +308,7 @@ export default function ActivityS1() {
       )}
 
       {/* ── ボトムバー ── */}
-      <div style={{ padding: '16px 24px', borderTop: '1px solid #EEE', display: 'flex', justifyContent: 'center', gap: '16px' }}>
+      <div className="s1-feed-footer" style={{ padding: '16px 24px', borderTop: '1px solid #EEE', display: 'flex', justifyContent: 'center', gap: '16px' }}>
         {phase === 'done' && roundCount < maxQ && (
           <button
             className="btn btn-primary animate-pop-in"
