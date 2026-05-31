@@ -69,6 +69,9 @@ export default function KidsMode() {
         <svg className="kids-map-path" viewBox="0 0 1000 760" preserveAspectRatio="none" aria-hidden="true">
           <path d="M70 700 C135 625 235 600 285 520 C335 440 255 255 310 145 C390 15 530 665 575 605 C640 520 785 495 760 430 C735 355 635 280 690 190 C770 85 865 125 940 75" />
         </svg>
+        <svg className="kids-map-path kids-map-path-ipad" viewBox="0 0 1000 760" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M72 710 C145 650 215 590 245 485 C275 390 270 260 292 155 C375 250 430 470 515 625 C590 650 670 600 710 515 C740 440 690 320 660 225 C745 155 840 120 940 82" />
+        </svg>
 
         {MAP_STAGES.map((mapStage) => {
           const stage = STAGES.find(({ id }) => id === mapStage.id);
