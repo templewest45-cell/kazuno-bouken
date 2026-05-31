@@ -79,58 +79,28 @@ export default function WorksheetMaker() {
     setPrintAnswers(includeAnswers)
     window.setTimeout(() => window.print(), 0)
   }
-  const makePageImage = (page, index) => new Promise((resolve) => {
-    const clone = page.cloneNode(true)
-    clone.style.boxShadow = 'none'
-    clone.style.margin = '0'
-    clone.style.transform = 'none'
-    const width = page.offsetWidth
-    const height = page.offsetHeight
-    const styles = Array.from(document.styleSheets).map((sheet) => {
-      try { return Array.from(sheet.cssRules).filter((rule) => rule.type !== CSSRule.IMPORT_RULE).map((rule) => rule.cssText).join('\n') } catch { return '' }
-    }).join('\n')
-    const markup = new XMLSerializer().serializeToString(clone)
-    const safeStyles = styles.replaceAll(']]>', ']]]]><![CDATA[>')
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style><![CDATA[${safeStyles}]]></style>${markup}</div></foreignObject></svg>`
-    const svgBlob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' })
-    const svgUrl = URL.createObjectURL(svgBlob)
-    const resolveSvgFallback = () => {
-      const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.svg`
-      resolve({ name, file: new File([svgBlob], name, { type: svgBlob.type }), url: svgUrl, isFallback: true })
-    }
-    const image = new Image()
-    image.onload = () => {
-      const scale = 2
-      const canvas = document.createElement('canvas')
-      canvas.width = width * scale
-      canvas.height = height * scale
-      const context = canvas.getContext('2d')
-      if (!context) {
-        resolveSvgFallback()
-        return
-      }
-      try {
-        context.scale(scale, scale)
-        context.drawImage(image, 0, 0)
-        canvas.toBlob((blob) => {
-          if (!blob) {
-            resolveSvgFallback()
-            return
-          }
-          URL.revokeObjectURL(svgUrl)
-          const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
-          const file = new File([blob], name, { type: 'image/png' })
-          resolve({ name, file, url: URL.createObjectURL(blob) })
-        }, 'image/png')
-      } catch {
-        resolveSvgFallback()
-      }
-    }
-    image.onerror = () => {
-      resolveSvgFallback()
-    }
-    image.src = svgUrl
-  })
+  const makePageImage = async (page, index) => {
+    const { default: html2canvas } = await import('html2canvas')
+    const canvas = await html2canvas(page, {
+      backgroundColor: '#ffffff',
+      logging: false,
+      scale: 2,
+      useCORS: true,
+      onclone: (documentClone) => {
+        const clonedPage = documentClone.querySelectorAll('.worksheet-preview .print-page')[index]
+        if (!clonedPage) return
+        clonedPage.style.boxShadow = 'none'
+        clonedPage.style.margin = '0'
+        clonedPage.style.transform = 'none'
+      },
+    })
+    const blob = await new Promise((resolve, reject) => {
+      canvas.toBlob((result) => result ? resolve(result) : reject(new Error('画像データを作成できませんでした。')), 'image/png')
+    })
+    const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
+    const file = new File([blob], name, { type: 'image/png' })
+    return { name, file, url: URL.createObjectURL(blob) }
+  }
   const exportImages = async (includeAnswers) => {
     setExportStatus('画像を作成しています...')
     exportedImages.forEach(({ url }) => URL.revokeObjectURL(url))
@@ -212,7 +182,6 @@ export default function WorksheetMaker() {
                 {index + 1}まいめを ほぞん
               </button>
               <a href={image.url} target="_blank" rel="noreferrer">ひらいて ほぞん</a>
-              {image.isFallback && <small>Safariようの ほぞんがぞうです</small>}
             </div>)}
           </div>
           <button className="btn" onClick={() => {
