@@ -212,7 +212,7 @@ export default function ActivityS2Arrange() {
             </button>
           )}
 
-          {phase === 'done' && roundCount >= maxQ - 1 && (
+          {phase === 'done' && roundCount >= maxQ && (
             <div className="animate-pop-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
               <img src="/animals/hanamaru.png" alt="はなまる" style={{ width: '120px', height: '120px', objectFit: 'contain' }} />
               <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#2E7D32' }}>{maxQ}かい ぜんぶ できたね！</div>

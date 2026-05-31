@@ -5,6 +5,7 @@ import { LogStore } from '../store/logStore';
 import { speak } from '../utils/speak';
 import { Settings } from '../store/settings';
 import CompletionActions from './CompletionActions';
+import './ActivityS2FillBlank.css';
 
 const JP_NUMS = ['', 'いち', 'に', 'さん', 'よん', 'ご', 'ろく', 'なな', 'はち', 'きゅう', 'じゅう'];
 
@@ -104,10 +105,10 @@ export default function ActivityS2FillBlank() {
   if (!problem) return null;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100vh', backgroundColor: '#FAFAFA' }}>
+    <div className="s2-fill-page" style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100vh', backgroundColor: '#FAFAFA' }}>
       
       {/* ヘッダー */}
-      <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #EEE' }}>
+      <div className="s2-fill-header" style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #EEE' }}>
         <button className="btn" onClick={() => navigate('/kids/stage/2')} style={{ padding: '8px 16px', minHeight: '40px' }}>
           <ArrowLeft size={20} /> もどる
         </button>
@@ -120,7 +121,7 @@ export default function ActivityS2FillBlank() {
       </div>
 
       {/* お手本の船団（1〜5の並び） */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px', backgroundColor: '#E0F7FA', borderBottom: '2px solid #80DEEA' }}>
+      <div className="s2-fill-number-line" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px', backgroundColor: '#E0F7FA', borderBottom: '2px solid #80DEEA' }}>
         <div style={{ fontSize: '30px', marginRight: '8px' }}>⛵</div>
         {Array.from({ length: 5 }, (_, i) => i + 1).map(num => (
           <div key={num} style={{
@@ -134,15 +135,15 @@ export default function ActivityS2FillBlank() {
       </div>
 
       {/* 問いかけ */}
-      <div style={{ textAlign: 'center', padding: '24px 16px 8px', fontSize: '32px', fontWeight: 'bold', color: '#333' }}>
+      <div className="s2-fill-question" style={{ textAlign: 'center', padding: '24px 16px 8px', fontSize: '32px', fontWeight: 'bold', color: '#333' }}>
         {phase === 'choose' ? 'ここにはいる すうじは どれかな？' : '⭐ せいかい！ ⭐'}
       </div>
 
       {/* メインコンテンツ（船団） */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '60px', padding: '16px' }}>
+      <div className="s2-fill-main" style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '60px', padding: '16px' }}>
         
         {/* 大きくなった船団コンテナ */}
-        <div style={{
+        <div className="s2-fill-train" style={{
           display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', justifyContent: 'center',
           backgroundColor: '#E3F2FD', padding: '40px 48px', borderRadius: '48px',
           boxShadow: '0 8px 32px rgba(13, 71, 161, 0.1)', border: '6px solid #90CAF9'
@@ -160,7 +161,7 @@ export default function ActivityS2FillBlank() {
             const showHint = isBlank && !filled && hasMistake;
 
             return (
-              <div key={i} className="animate-drop-in" style={{
+              <div key={i} className="animate-drop-in s2-fill-car" style={{
                 position: 'relative',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 width: '120px', height: '120px', // ★ サイズを1.5倍に拡大
@@ -185,14 +186,14 @@ export default function ActivityS2FillBlank() {
 
         {/* 選択肢（ホーム） */}
         {phase === 'choose' && (
-          <div className="animate-pop-in" style={{ display: 'flex', gap: '32px', marginTop: '16px' }}>
+          <div className="animate-pop-in s2-fill-choices" style={{ display: 'flex', gap: '32px', marginTop: '16px' }}>
             {problem.choices.map((choice) => {
               const isWrong = wrongChoice === choice;
               return (
                 <button
                   key={choice}
                   onClick={() => handleChoice(choice)}
-                  className={isWrong ? 'animate-shake' : ''}
+                  className={`s2-fill-choice${isWrong ? ' animate-shake' : ''}`}
                   style={{
                     width: '140px', height: '140px', // ★ サイズを拡大
                     backgroundColor: isWrong ? '#FFEBEE' : 'white',
@@ -215,7 +216,7 @@ export default function ActivityS2FillBlank() {
         )}
 
         {/* 次へボタン / クリア */}
-        <div style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="s2-fill-footer" style={{ height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           {phase === 'done' && roundCount < maxQ && (
             <button
               className="btn btn-primary animate-pop-in"
@@ -226,8 +227,8 @@ export default function ActivityS2FillBlank() {
             </button>
           )}
 
-          {phase === 'done' && roundCount >= maxQ - 1 && (
-            <div className="animate-pop-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
+          {phase === 'done' && roundCount >= maxQ && (
+            <div className="animate-pop-in s2-fill-complete" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
               <img src="/animals/hanamaru.png" alt="はなまる" style={{ width: '120px', height: '120px', objectFit: 'contain' }} />
               <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#2E7D32' }}>{maxQ}かい ぜんぶ できたね！</div>
               <CompletionActions activityId="S2_fill_blank" onRestart={resetAll} stagePath="/kids" />

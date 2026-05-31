@@ -7,6 +7,12 @@ export default function KidsModeViewport() {
   const isKidsMode = pathname.startsWith('/kids');
 
   useEffect(() => {
+    if (!isKidsMode) return;
+    document.querySelector('.app-container')?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }, [isKidsMode, pathname]);
+
+  useEffect(() => {
     if (!isKidsMode) return undefined;
 
     const scrollX = window.scrollX;

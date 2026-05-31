@@ -1,0 +1,116 @@
+/* Fit the fill-in activity into a phone browser's short landscape viewport. */
+@media (orientation: landscape) and (max-height: 500px) {
+  .s2-fill-page {
+    min-height: 100dvh !important;
+  }
+
+  .s2-fill-header {
+    gap: 8px !important;
+    padding: 4px 10px !important;
+  }
+
+  .s2-fill-header .btn {
+    min-height: 36px !important;
+    padding: 5px 9px !important;
+    font-size: 14px;
+  }
+
+  .s2-fill-number-line {
+    padding: 3px 10px !important;
+  }
+
+  .s2-fill-number-line > div {
+    width: 27px !important;
+    height: 27px !important;
+    font-size: 15px !important;
+  }
+
+  .s2-fill-number-line > div:first-child {
+    width: auto !important;
+    height: auto !important;
+    font-size: 23px !important;
+  }
+
+  .s2-fill-question {
+    padding: 4px 10px 1px !important;
+    font-size: 19px !important;
+  }
+
+  .s2-fill-main {
+    gap: 8px !important;
+    padding: 5px 10px 10px !important;
+  }
+
+  .s2-fill-train {
+    gap: 6px !important;
+    padding: 10px 14px !important;
+    border-width: 3px !important;
+    border-radius: 20px !important;
+  }
+
+  .s2-fill-train > .animate-pop-in {
+    margin-right: 5px !important;
+    font-size: 62px !important;
+  }
+
+  .s2-fill-car {
+    width: 66px !important;
+    height: 66px !important;
+    border-width: 3px !important;
+    border-radius: 14px !important;
+    font-size: 39px !important;
+  }
+
+  .s2-fill-car > div {
+    bottom: -21px !important;
+    font-size: 28px !important;
+  }
+
+  .s2-fill-choices {
+    gap: 14px !important;
+    margin-top: 7px !important;
+  }
+
+  .s2-fill-choice {
+    width: 68px !important;
+    height: 68px !important;
+    border-width: 3px !important;
+    border-radius: 16px !important;
+    font-size: 39px !important;
+  }
+
+  .s2-fill-footer {
+    height: auto !important;
+    min-height: 46px;
+  }
+
+  .s2-fill-footer .btn {
+    min-height: 40px;
+    padding: 7px 28px !important;
+    font-size: 16px !important;
+  }
+
+  .s2-fill-complete {
+    gap: 5px !important;
+  }
+
+  .s2-fill-complete > img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .s2-fill-complete > div {
+    font-size: 17px !important;
+  }
+
+  .s2-fill-complete .completion-result {
+    gap: 5px;
+    padding: 6px;
+    border-width: 3px;
+    border-radius: 15px;
+  }
+
+  .s2-fill-complete .completion-result-title {
+    font-size: 19px;
+  }
+}
