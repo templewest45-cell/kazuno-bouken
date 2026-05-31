@@ -116,13 +116,14 @@ export default function ActivityS1Count() {
     ghostRef.current = ghost;
   };
   const handleTouchMove = (e) => {
-    e.preventDefault();
     if (!ghostRef.current) return;
+    e.preventDefault();
     const t = e.touches[0];
     ghostRef.current.style.left = t.clientX + 'px';
     ghostRef.current.style.top  = t.clientY + 'px';
   };
   const handleTouchEnd = (e) => {
+    if (dragFoodRef.current === null && !ghostRef.current) return;
     e.preventDefault();
     if (ghostRef.current) { document.body.removeChild(ghostRef.current); ghostRef.current = null; }
     if (dragFoodRef.current === null || phase !== 'feed') return;

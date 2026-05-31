@@ -13,6 +13,7 @@ const NEURAL_VOICE_LABELS = ['Neural', 'Natural', 'Online'];
 
 let _cachedVoice = null;
 let _isUnlocked = false;
+let _pendingSpeech = null;
 
 function _loadVoice() {
   if (!('speechSynthesis' in window)) return;
@@ -46,11 +47,18 @@ export function unlockSpeech() {
   _loadVoice();
   if (_isUnlocked) return;
 
+  _isUnlocked = true;
+  if (_pendingSpeech) {
+    const { text, withPrefix } = _pendingSpeech;
+    _pendingSpeech = null;
+    speak(text, withPrefix);
+    return;
+  }
+
   const u = new SpeechSynthesisUtterance(' ');
   u.lang = 'ja-JP';
   u.volume = 0;
   synth.speak(u);
-  _isUnlocked = true;
 }
 
 // 楽しい感嘆詞プレフィックス（短いものをランダムに付ける）
@@ -63,6 +71,11 @@ const FUN_PREFIX = ['', '', '', 'さあ、', 'いくよ！', 'やってみよう
  */
 export function speak(text, withPrefix = false) {
   if (!('speechSynthesis' in window)) return;
+  if (!_isUnlocked) {
+    _pendingSpeech = { text, withPrefix };
+    return;
+  }
+
   const synth = window.speechSynthesis;
   synth.resume();
   _loadVoice();
