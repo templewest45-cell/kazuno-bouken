@@ -1,0 +1,81 @@
+.castle-page {
+  min-height: 100vh;
+  padding: 22px;
+  overflow: hidden;
+  color: #2e2451;
+  background: linear-gradient(#8678dd 0 24%, #c2b9f3 24% 52%, #8bc47d 52%);
+  font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+
+.castle-sky { display: flex; justify-content: space-around; color: #fff5a3; font-size: 28px; }
+.castle-header { display: flex; max-width: 950px; margin: 0 auto 14px; align-items: center; justify-content: space-between; gap: 16px; }
+.castle-header h1 { margin: 0; color: white; font-size: clamp(25px, 4vw, 42px); text-shadow: 0 3px #5a438f; }
+.castle-eyebrow { margin: 0; color: #fff7ad; font-weight: 800; text-align: center; }
+.castle-crown { font-size: 56px; }
+.castle-back, .castle-next {
+  border: 0; border-radius: 18px; padding: 12px 18px; color: #563b80; background: #fff2a8;
+  box-shadow: 0 5px #c68d45; font-size: 17px; font-weight: 900; cursor: pointer;
+}
+.castle-board {
+  position: relative; max-width: 920px; min-height: 430px; margin: auto; padding: 24px;
+  border: 8px solid #f2c86a; border-radius: 30px; background: #fffdf4;
+  box-shadow: 0 10px #5c4c85;
+}
+.castle-board::before { content: "🏰"; position: absolute; right: -17px; bottom: -20px; font-size: 96px; opacity: .2; }
+.castle-instruction { margin: 0 0 18px; color: #644694; font-size: clamp(20px, 3vw, 29px); font-weight: 900; text-align: center; }
+.castle-feedback { min-height: 33px; margin: 18px 0 0; color: #ee7f35; font-size: 22px; font-weight: 900; text-align: center; }
+.castle-feedback.correct { color: #42a84b; }
+.castle-feedback.wrong { color: #e76b51; }
+.castle-footer { display: flex; justify-content: center; padding: 22px; }
+.castle-gates { display: flex; justify-content: center; gap: clamp(20px, 8vw, 90px); padding: 24px; }
+.castle-gate {
+  min-width: 190px; min-height: 210px; border: 6px solid #d9a742; border-radius: 95px 95px 14px 14px;
+  background: #7255a5; box-shadow: inset 0 -18px #553b7c, 0 7px #a57b32; color: white; cursor: pointer;
+}
+.castle-gate strong { display: block; color: #fff3a5; font-size: 82px; }
+.castle-gems { display: block; max-width: 150px; margin: auto; font-size: 25px; line-height: 1.1; }
+.castle-gate.selected { outline: 8px solid #9adc76; }
+.castle-gate.open { animation: castle-door-open 1s ease forwards; }
+.castle-gate.open strong, .castle-gate.open .castle-gems { animation: castle-door-content .9s ease forwards; }
+@keyframes castle-door-open {
+  0% { transform: perspective(500px) rotateY(0); transform-origin: left; }
+  55% { transform: perspective(500px) rotateY(72deg); transform-origin: left; background: #3d285d; box-shadow: inset 18px 0 #25183b, 0 7px #a57b32; }
+  100% { transform: perspective(500px) rotateY(72deg) scale(.82); transform-origin: left; background: #25183b; box-shadow: inset 18px 0 #160f25, 0 7px #a57b32; }
+}
+@keyframes castle-door-content { to { opacity: .15; } }
+.castle-line-wrap { padding: 45px 8px 10px; }
+.castle-drag-card { width: 100px; margin: 0 auto 45px; border: 5px solid #f0c34f; border-radius: 18px; background: #7a5bac; color: white; font-size: 62px; font-weight: 900; text-align: center; cursor: grab; box-shadow: 0 6px #563a80; }
+.castle-line-card { width: 64px; height: 64px; margin-bottom: 34px; font-size: 38px; }
+.castle-line-card.placed { visibility: hidden; }
+.castle-numberline, .castle-line-labels { display: grid; grid-template-columns: repeat(10, 64px); justify-content: center; gap: 5px; }
+.castle-slot { width: 64px; height: 64px; border: 4px dashed #9270b6; border-radius: 12px; color: #765590; background: #fbf3ff; font-size: 32px; font-weight: 900; cursor: pointer; }
+.castle-line-labels span { padding-top: 7px; color: #765590; font-size: 19px; font-weight: 900; text-align: center; }
+.castle-slot.correct { color: #3ba84a; background: #ddf5c7; }
+.castle-slot.wrong { color: #da5f50; background: #ffe1dc; }
+.castle-steps { display: grid; grid-template-columns: repeat(4, 83px); justify-content: center; gap: 16px; margin: 30px auto; }
+.castle-step { width: 83px; height: 83px; border: 4px dashed #b48bd1; border-radius: 16px; background: #fbf3ff; color: #604482; font-size: 45px; font-weight: 900; }
+.castle-cards { display: flex; min-height: 100px; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.castle-card { width: 83px; height: 83px; border: 5px solid #dbaa43; border-radius: 17px; background: #7d60b0; color: white; font-size: 50px; font-weight: 900; box-shadow: 0 5px #533777; cursor: grab; }
+.castle-card:disabled { visibility: hidden; }
+.castle-ok { display: block; margin: 14px auto 0; border: 0; border-radius: 18px; padding: 13px 24px; color: white; background: #e88d42; box-shadow: 0 5px #b75f2e; font-size: 20px; font-weight: 900; cursor: pointer; }
+.castle-ok:disabled { opacity: .4; cursor: default; }
+.castle-reset { display: block; margin: 10px auto; border: 3px solid #e08976; border-radius: 18px; padding: 10px 18px; color: #b65546; background: #fff0ea; font-size: 18px; font-weight: 900; cursor: pointer; }
+.castle-between { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 42px 0; font-size: clamp(23px, 4vw, 41px); font-weight: 900; }
+.castle-between-condition { display: flex; align-items: center; gap: 10px; padding: 14px; border-radius: 20px; background: #f1e5ff; }
+.castle-between strong { min-width: 70px; padding: 11px; border-radius: 18px; color: white; background: #7557a8; text-align: center; }
+.castle-between .castle-between-question { min-width: 108px; padding: 19px 10px; border: 7px solid #e1ad45; border-radius: 50%; color: #604284; background: #fff1a0; font-size: 70px; line-height: 1; box-shadow: 0 7px #b77b31; }
+.castle-between span { color: #c48b34; }
+.castle-choices { display: flex; justify-content: center; gap: 20px; }
+.castle-choice { width: 92px; height: 92px; border: 5px solid #e1ad45; border-radius: 50%; color: #604284; background: #fff1a0; font-size: 43px; font-weight: 900; cursor: pointer; }
+@media (max-width: 620px) {
+  .castle-page { padding: 12px; }
+  .castle-board { min-height: 400px; padding: 16px 8px; border-width: 5px; }
+  .castle-crown { display: none; }
+  .castle-gates { gap: 14px; padding: 14px 0; }
+  .castle-gate { min-width: 132px; min-height: 190px; }
+  .castle-gate strong { font-size: 68px; }
+  .castle-slot { font-size: 19px; border-left-width: 2px; }
+  .castle-line-wrap { overflow-x: auto; }
+  .castle-numberline, .castle-line-labels { width: max-content; justify-content: start; }
+  .castle-between { flex-direction: column; gap: 12px; margin: 22px 0; }
+}

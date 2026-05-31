@@ -1,0 +1,68 @@
+.candy-count-page {
+  display: flex; min-height: 100vh; flex-direction: column; overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 20%, #fff7d9 0 4px, transparent 5px),
+    radial-gradient(circle at 86% 16%, #fff7d9 0 5px, transparent 6px),
+    linear-gradient(145deg, #ffd2bd, #f3b6d5 58%, #d89bc5);
+}
+.candy-count-header { display: flex; align-items: center; gap: 12px; padding: 15px 20px; }
+.candy-count-header .btn { min-height: 54px; background: #fff8ec; color: #53351f; }
+.candy-count-title { flex: 1; text-align: center; color: #6c3b43; font-size: clamp(22px, 4vw, 32px); font-weight: bold; text-shadow: 0 3px #fff2df; }
+.candy-count-main { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 19px; padding: 14px; }
+.candy-count-question { padding: 10px 25px; border: 4px solid #e8a765; border-radius: 20px; background: #fff9e8; color: #633d25; font-size: clamp(22px, 4vw, 31px); font-weight: bold; box-shadow: 0 7px #a7675b66; }
+.candy-count-board {
+  display: grid; width: min(680px, 95vw); min-height: 285px; grid-template-columns: 1fr 134px; align-items: center; gap: 16px;
+  padding: 24px; border: 6px solid #e8bb83; border-radius: 34px; background: #fff9ebf5; box-shadow: 0 11px #9a675155;
+}
+.candy-count-items { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding: 8px; font-size: clamp(45px, 7vw, 69px); }
+.candy-count-drop {
+  display: grid; width: 118px; height: 118px; place-items: center; border: 6px dashed #e8a765; border-radius: 21px;
+  background: #fff4df; color: #d59c67; font-size: 61px; font-weight: bold;
+}
+.candy-count-drop.is-target { animation: candyDropPulse .75s ease-in-out infinite alternate; }
+.candy-count-drop.is-correct { border-style: solid; border-color: #72b751; background: #eaffd7; color: #4c993d; animation: popIn .45s ease-out; }
+.candy-count-guide { color: #754650; font-size: 16px; font-weight: bold; text-align: center; }
+.candy-number-tray { display: flex; max-width: 760px; flex-wrap: wrap; justify-content: center; gap: 9px; padding: 13px; border: 4px solid #e0a366; border-radius: 23px; background: #fff0d9cc; }
+.candy-number-card {
+  display: grid; width: 63px; height: 68px; place-items: center; border: 4px solid #e99d57; border-radius: 15px; background: #fff9ea;
+  color: #e17943; font-size: 34px; font-weight: bold; box-shadow: 0 5px #aa6a4d66; cursor: grab;
+}
+.candy-number-card:active { cursor: grabbing; }
+.candy-number-card.is-wrong { background: #ffd7d2; border-color: #d95858; animation: shake .4s ease-in-out; }
+.candy-number-card.is-active { background: #eaffd7; border-color: #72b751; }
+.candy-count-feedback { color: #5c9a3f; font-size: 27px; font-weight: bold; text-shadow: 0 2px white; }
+.candy-count-footer { display: flex; min-height: 89px; align-items: center; justify-content: center; padding: 12px; }
+.candy-flash-card {
+  display: flex; width: min(330px, 72vw); height: 330px; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  border: 9px solid #efae61; border-radius: 36px; background: #fff9e8; color: #e17d44; box-shadow: 0 14px #a76b5a66; cursor: pointer;
+}
+.candy-flash-card span { font-size: 190px; font-weight: bold; line-height: .9; }.candy-flash-card small { display: flex; align-items: center; gap: 7px; color: #996146; font-size: 17px; font-weight: bold; }
+.candy-flash-card.is-correct { border-color: #72b751; background: #eaffd7; animation: popIn .45s ease-out; }
+.candy-flash-progress { color: #754650; font-size: 20px; font-weight: bold; }
+.candy-flash-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.candy-listen-button { min-width: 260px; }
+.candy-flash-heard { color: #754650; font-size: 16px; font-weight: bold; }
+.candy-flash-collection { display: flex; min-height: 57px; max-width: 760px; flex-wrap: wrap; justify-content: center; gap: 7px; padding: 8px; }
+.candy-flash-collection span { display: grid; width: 45px; height: 48px; place-items: center; border: 3px solid #72b751; border-radius: 11px; background: #efffdb; color: #4c993d; font-size: 24px; font-weight: bold; box-shadow: 0 4px #7ba35a66; }
+.candy-sort-slots { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 16px; }
+.candy-sort-slots span { display: grid; width: 86px; height: 92px; place-items: center; border: 5px dashed #e8a765; border-radius: 18px; background: #fff9e8; color: #d7ab80; font-size: 45px; font-weight: bold; }
+.candy-sort-slots .is-filled { border-style: solid; border-color: #72b751; background: #eaffd7; color: #4c993d; animation: popIn .35s ease-out; }
+.candy-big-number { display: grid; width: 144px; height: 144px; place-items: center; border: 7px solid #efae61; border-radius: 50%; background: #fff7dd; color: #e17d44; font-size: 85px; font-weight: bold; box-shadow: 0 9px #a76b5a66; }
+.candy-plate-grid { display: grid; width: min(850px, 96vw); grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.candy-plate { display: flex; min-height: 170px; flex-wrap: wrap; align-content: center; justify-content: center; gap: 4px; padding: 13px; border: 5px solid #e4b16f; border-radius: 26px; background: #fff8e9; font-size: 39px; box-shadow: 0 8px #9b6a5266; cursor: pointer; }
+.candy-plate.is-wrong { background: #ffd7d2; border-color: #d95858; animation: shake .4s ease-in-out; }.candy-plate.is-correct { background: #eaffd7; border-color: #72b751; animation: popIn .45s ease-out; }
+.candy-trace-board { position: relative; width: min(520px, 91vw); height: 390px; border: 7px solid #e4b16f; border-radius: 33px; background: #fff9e8; box-shadow: 0 11px #9b6a5266; }
+.candy-trace-guide { position: absolute; inset: 0; display: grid; place-items: center; color: #e8bd8a; font-size: 315px; font-weight: bold; line-height: 1; }
+.candy-trace-board canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+.candy-hunt-grid { display: grid; width: min(650px, 94vw); grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.candy-hunt-card { display: grid; min-height: 105px; place-items: center; border: 5px solid #e4b16f; border-radius: 23px; background: #fff8e9; color: #df7b45; font-size: 55px; font-weight: bold; box-shadow: 0 7px #9b6a5266; cursor: pointer; }
+.candy-hunt-card.is-wrong { background: #ffd7d2; border-color: #d95858; animation: shake .4s ease-in-out; }.candy-hunt-card.is-correct { background: #eaffd7; border-color: #72b751; animation: popIn .45s ease-out; }
+@keyframes candyDropPulse { from { transform: scale(1); box-shadow: 0 0 5px #fff5b2; } to { transform: scale(1.06); box-shadow: 0 0 24px #fff19d; } }
+@media (max-width: 620px) {
+  .candy-count-header { padding: 10px; }.candy-count-header .btn { min-width: 52px; padding: 9px 12px; }.candy-count-header .btn span { display: none; }
+  .candy-count-board { min-height: 230px; grid-template-columns: 1fr 91px; padding: 15px; }
+  .candy-count-drop { width: 84px; height: 84px; font-size: 47px; }
+  .candy-number-card { width: 49px; height: 54px; font-size: 27px; }
+  .candy-plate-grid { gap: 8px; }.candy-plate { min-height: 132px; padding: 8px; font-size: 30px; }
+  .candy-hunt-grid { gap: 8px; }.candy-hunt-card { min-height: 76px; font-size: 40px; }
+}

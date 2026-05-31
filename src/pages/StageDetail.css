@@ -1,0 +1,59 @@
+.stage-menu-page {
+  position: relative; min-height: 100vh; overflow: hidden;
+  color: #55361f;
+}
+.stage-menu-page::before {
+  content: ''; position: absolute; inset: 0; opacity: .9;
+}
+.stage-menu-forest::before { background: linear-gradient(#a6ddadcc, #79b75dcc), radial-gradient(circle at 50% 42%, #fff6b3, transparent 37%); }
+.stage-menu-sea::before { background: linear-gradient(#7bd9ef, #2384be), radial-gradient(circle at 46% 28%, #dfffff, transparent 32%); }
+.stage-menu-sky::before { background: linear-gradient(#8fd5f1, #5d8bd9 66%, #7880d6), radial-gradient(circle at 45% 20%, #fff8cd, transparent 30%); }
+.stage-menu-garden::before { background: linear-gradient(#d2e987, #79b85c); }
+.stage-menu-candy::before { background: linear-gradient(#ffd7ba, #e9a9c8); }
+.stage-menu-castle::before { background: linear-gradient(#9cb7e8, #6769ad); }
+.stage-menu-scenery { position: absolute; inset: 0; pointer-events: none; }
+.stage-menu-scenery span { position: absolute; z-index: 1; font-size: clamp(54px, 9vw, 130px); filter: drop-shadow(0 8px 3px #3b633744); }
+.scenery-1 { left: -1%; top: 10%; }.scenery-2 { left: 5%; bottom: 5%; }.scenery-3 { right: 10%; top: 16%; }.scenery-4 { right: -1%; bottom: 3%; }.scenery-5 { left: 46%; bottom: 1%; }
+.stage-menu-header { position: relative; z-index: 2; display: grid; grid-template-columns: 150px 1fr 150px; align-items: center; gap: 10px; padding: 19px 25px; }
+.stage-menu-header .btn { min-height: 58px; background: #fff8ec; color: #4b3424; }
+.stage-menu-header h1 { text-align: center; color: #53331d; font-size: clamp(24px, 4vw, 39px); text-shadow: 0 3px 0 #fff9e9, 0 0 7px #fff9e9; }
+.stage-menu-main { position: relative; z-index: 2; width: min(1140px, calc(100% - 32px)); margin: 0 auto; padding-bottom: 36px; }
+.stage-menu-course {
+  width: fit-content; margin: 0 auto 13px; padding: 9px 42px; border: 4px solid #9a552f; border-radius: 9px;
+  background: #b96d43; color: white; font-size: clamp(17px, 2.4vw, 24px); font-weight: bold; box-shadow: 0 5px 0 #743d27;
+}
+.stage-menu-section { margin: 18px 0 24px; }
+.stage-menu-ribbon {
+  width: fit-content; min-width: min(560px, 88vw); margin: 0 auto 17px; padding: 8px 34px; border: 4px solid #924f2e; border-radius: 9px;
+  background: #b96d43; color: white; font-size: clamp(17px, 2.5vw, 24px); text-align: center; box-shadow: 0 5px 0 #723e27;
+}
+.ribbon-advanced { background: #a85e3d; }
+.stage-menu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.stage-menu-card {
+  position: relative; display: grid; min-height: 190px; grid-template-columns: 42% 1fr; align-items: center; gap: 10px;
+  padding: 24px 19px 18px; border: 5px solid #e4c89a; border-radius: 27px; background: #fff9ebee; color: #54341e;
+  font-family: var(--font-family); text-align: left; cursor: pointer; box-shadow: 0 9px 0 #8c674a77, 0 14px 20px #4b5d3c44;
+  transition: transform .2s, box-shadow .2s;
+}
+.stage-menu-card:hover { transform: translateY(-5px); box-shadow: 0 13px 0 #8c674a77, 0 18px 24px #4b5d3c55; }
+.stage-menu-card.is-coming { opacity: .78; filter: saturate(.68); }
+.stage-menu-cookie {
+  position: absolute; top: -14px; right: 14px; padding: 10px 8px; border-radius: 50%; background: #d99a58; color: #67411f;
+  font-size: 12px; font-weight: bold; box-shadow: inset 0 0 0 3px #efbd75, 0 3px 0 #9f6a3d;
+}
+.stage-menu-stars { position: absolute; right: 18px; bottom: 10px; color: #eaa32f; font-size: 19px; letter-spacing: 2px; text-shadow: 0 2px white; }
+.stage-menu-preview {
+  display: flex; min-height: 112px; align-items: center; justify-content: center; gap: 6px; padding: 10px;
+  border-radius: 19px; background: #f8e2b5; font-size: clamp(30px, 4vw, 49px); box-shadow: inset 0 4px 0 #fff8dd;
+}
+.stage-menu-card-copy { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+.stage-menu-card-copy strong { font-size: clamp(20px, 2.7vw, 29px); line-height: 1.16; }
+.stage-menu-card-copy small { color: #84654a; font-size: 13px; font-weight: bold; line-height: 1.55; }
+.stage-menu-missing { display: grid; min-height: 100vh; place-items: center; }
+@media (max-width: 720px) {
+  .stage-menu-header { grid-template-columns: 62px 1fr 62px; padding: 12px; }
+  .stage-menu-header .btn { min-width: 54px; padding: 10px; font-size: 0; }
+  .stage-menu-grid { grid-template-columns: 1fr; }
+  .stage-menu-card { min-height: 156px; }
+  .stage-menu-preview { min-height: 90px; }
+}

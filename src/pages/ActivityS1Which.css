@@ -1,0 +1,304 @@
+.which-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 72% 8%, rgba(255, 255, 255, 0.95) 0 2%, transparent 8%),
+    linear-gradient(145deg, #8bd3e7 0%, #b8e7c0 47%, #5d9d64 100%);
+}
+
+.which-page::before,
+.which-page::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.which-page::before {
+  inset: auto -8% -150px;
+  height: 390px;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(180deg, #95d16e, #4d945b);
+  box-shadow: inset 0 12px 0 rgba(255, 255, 255, 0.18);
+}
+
+.which-page::after {
+  width: 480px;
+  height: 260px;
+  right: -90px;
+  top: 62px;
+  border-radius: 55% 0 0 50%;
+  opacity: 0.58;
+  background:
+    radial-gradient(circle at 72% 48%, #304b94 0 18%, transparent 19%),
+    radial-gradient(circle at 72% 60%, #243c83 0 25%, transparent 26%),
+    linear-gradient(150deg, transparent 0 45%, #5077ba 46% 100%);
+}
+
+.which-scenery,
+.which-content {
+  position: relative;
+  z-index: 1;
+}
+
+.which-scenery {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.which-tree {
+  position: absolute;
+  bottom: 8px;
+  font-size: clamp(88px, 12vw, 170px);
+  filter: drop-shadow(0 12px 3px rgba(45, 90, 52, 0.2));
+}
+
+.which-tree-left { left: -28px; }
+.which-tree-right { right: -28px; transform: scaleX(-1); }
+
+.which-cloud {
+  position: absolute;
+  top: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 72px;
+  opacity: 0.88;
+}
+
+.which-candy {
+  position: absolute;
+  right: 7%;
+  bottom: 10%;
+  font-size: clamp(64px, 8vw, 112px);
+  transform: rotate(15deg);
+}
+
+.which-stars {
+  position: absolute;
+  top: 98px;
+  right: 8%;
+  color: #fff4a8;
+  font-size: 30px;
+  letter-spacing: 18px;
+  text-shadow: 0 0 12px #fffbd2;
+}
+
+.which-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 24px;
+}
+
+.which-header .btn {
+  min-height: 52px;
+  background: #fff8ec;
+  border: 2px solid rgba(108, 72, 41, 0.12);
+  color: #493323;
+}
+
+.which-title {
+  flex: 1;
+  text-align: center;
+  color: #493323;
+}
+
+.which-title strong {
+  display: block;
+  font-size: clamp(21px, 3vw, 29px);
+}
+
+.which-title span {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 3px 14px;
+  border-radius: 999px;
+  background: #f47b45;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 3px 0 #bb5532;
+}
+
+.which-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: min(920px, calc(100% - 28px));
+  margin: 0 auto;
+}
+
+.which-score {
+  align-self: center;
+  min-height: 34px;
+  padding: 5px 18px;
+  border-radius: 18px;
+  background: rgba(255, 249, 231, 0.88);
+  color: #7b5b39;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.which-question {
+  align-self: center;
+  margin: 8px 0 10px;
+  padding: 12px 32px;
+  border: 4px solid #f0c889;
+  border-radius: 22px;
+  background: #fff8ec;
+  color: #513724;
+  font-size: clamp(20px, 3vw, 27px);
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 8px 0 rgba(126, 83, 46, 0.18);
+  cursor: pointer;
+}
+
+.which-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(12px, 3vw, 30px);
+  padding: 8px 12px 16px;
+}
+
+.which-animal-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 14px 16px;
+  border: 4px solid #e4bb7f;
+  border-radius: 28px;
+  background: rgba(255, 248, 227, 0.96);
+  box-shadow: 0 10px 0 rgba(121, 82, 44, 0.18), 0 16px 22px rgba(72, 95, 45, 0.15);
+  cursor: pointer;
+  transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.which-animal-card:hover {
+  transform: translateY(-4px);
+}
+
+.which-animal-card.is-selected {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.which-animal-card.is-correct {
+  border-color: #77bd56;
+  background: #f3ffe5;
+  box-shadow: 0 10px 0 #4f913f55, 0 0 28px #91d961aa;
+}
+
+.which-animal-card.is-wrong {
+  border-color: #ed8874;
+  background: #fff1e9;
+}
+
+.which-animal {
+  width: clamp(84px, 14vw, 128px);
+  height: clamp(84px, 14vw, 128px);
+  object-fit: contain;
+}
+
+.which-animal-name {
+  color: #64452f;
+  font-size: clamp(17px, 2.3vw, 21px);
+  font-weight: bold;
+}
+
+.which-stack {
+  display: flex;
+  width: 116px;
+  height: 216px;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1px;
+  padding: 7px;
+  border: 3px solid #f5c15b;
+  border-radius: 18px;
+  background: #fff2ba;
+  box-shadow: inset 0 4px 0 rgba(255, 255, 255, 0.65);
+}
+
+.which-apple {
+  display: flex;
+  width: 90px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  font-size: 31px;
+  line-height: 1;
+}
+
+.which-apple + .which-apple {
+  border-bottom: 1px dashed #e5ae43;
+}
+
+.which-number {
+  min-height: 37px;
+  padding: 1px 18px;
+  border-radius: 18px;
+  background: #f89d46;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  box-shadow: 0 4px 0 #ca6a2c;
+}
+
+.which-number.is-hidden { visibility: hidden; }
+
+.which-result-badge {
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.which-bottom {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: 94px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px 20px;
+}
+
+.which-bottom .btn {
+  border: 3px solid rgba(255, 255, 255, 0.55);
+}
+
+.which-finish {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  color: #513724;
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  .which-header { padding: 10px 12px; }
+  .which-header .btn { min-width: 52px; padding: 9px 12px; }
+  .which-header .btn span { display: none; }
+  .which-cloud { top: 80px; font-size: 56px; }
+  .which-question { padding: 10px 16px; }
+  .which-cards { gap: 9px; padding-inline: 2px; }
+  .which-animal-card { padding: 10px 7px 12px; border-radius: 22px; }
+  .which-stack { width: 96px; height: 193px; padding: 5px; }
+  .which-apple { width: 76px; height: 34px; font-size: 28px; }
+  .which-candy { display: none; }
+}

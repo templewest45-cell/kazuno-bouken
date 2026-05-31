@@ -1,0 +1,18 @@
+.teacher-guide { display: flex; flex-direction: column; gap: 18px; margin: 20px; color: #473b31; }
+.teacher-guide-intro, .teacher-guide-section { padding: 22px; border-radius: 18px; background: white; box-shadow: var(--box-shadow); }
+.teacher-guide h2 { margin-bottom: 12px; color: #6b4a31; font-size: 24px; }
+.teacher-guide p { margin: 7px 0; line-height: 1.7; }
+.teacher-guide-note { display: flex; flex-direction: column; gap: 5px; margin-top: 14px; padding: 13px; border: 2px solid #e5b34f; border-radius: 12px; background: #fff8d8; line-height: 1.6; }
+.teacher-guide-table-wrap { margin-top: 13px; overflow-x: auto; }
+.teacher-guide-table { width: 100%; min-width: 1000px; border-collapse: collapse; font-size: 14px; line-height: 1.45; }
+.teacher-guide-table th, .teacher-guide-table td { padding: 10px; border: 1px solid #decda9; vertical-align: top; text-align: left; }
+.teacher-guide-table thead th { background: #6f5a9e; color: white; }
+.teacher-guide-table tbody th { width: 145px; background: #f5efff; color: #5c4381; }
+.teacher-guide-table tbody th b { display: block; font-size: 22px; }
+.teacher-guide-table tbody th span { display: block; }
+.teacher-guide-table ul { margin: 0; padding-left: 18px; }
+.teacher-guide-table li { margin-bottom: 3px; }
+.curriculum-table { min-width: 760px; }
+.teacher-guide-sources { display: flex; flex-wrap: wrap; gap: 8px; font-size: 14px; }
+.teacher-guide-sources a { color: #5542a5; }
+.is-none { color: #a34d4d; font-weight: bold; }
