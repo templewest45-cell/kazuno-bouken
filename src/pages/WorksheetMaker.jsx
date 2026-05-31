@@ -90,7 +90,8 @@ export default function WorksheetMaker() {
       try { return Array.from(sheet.cssRules).filter((rule) => rule.type !== CSSRule.IMPORT_RULE).map((rule) => rule.cssText).join('\n') } catch { return '' }
     }).join('\n')
     const markup = new XMLSerializer().serializeToString(clone)
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style>${styles}</style>${markup}</div></foreignObject></svg>`
+    const safeStyles = styles.replaceAll(']]>', ']]]]><![CDATA[>')
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style><![CDATA[${safeStyles}]]></style>${markup}</div></foreignObject></svg>`
     const svgBlob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' })
     const svgUrl = URL.createObjectURL(svgBlob)
     const resolveSvgFallback = () => {
