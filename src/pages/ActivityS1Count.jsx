@@ -255,6 +255,7 @@ export default function ActivityS1Count() {
                 width: '90px', height: '90px',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'grab',
+                touchAction: 'none',
               }}
             >
               <img src={FOOD.src} alt={FOOD.name} draggable={false}

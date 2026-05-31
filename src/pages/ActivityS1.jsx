@@ -282,6 +282,7 @@ export default function ActivityS1() {
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   opacity: eaten ? 0.1 : 1,
                   cursor: eaten ? 'default' : 'grab',
+                  touchAction: eaten ? 'auto' : 'none',
                   transition: 'opacity 0.3s',
                 }}
               >

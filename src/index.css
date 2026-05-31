@@ -64,12 +64,22 @@ body.kids-mode-active {
   inset: 0;
 }
 
-body.kids-mode-active #root,
-body.kids-mode-active .app-container {
+body.kids-mode-active #root {
   width: 100%;
+  height: 100vh;
   height: 100dvh;
   max-width: none;
   overflow: hidden;
+}
+
+body.kids-mode-active .app-container {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .kids-landscape-prompt {
