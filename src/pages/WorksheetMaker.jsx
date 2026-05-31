@@ -79,7 +79,7 @@ export default function WorksheetMaker() {
     setPrintAnswers(includeAnswers)
     window.setTimeout(() => window.print(), 0)
   }
-  const makePageImage = (page, index) => new Promise((resolve, reject) => {
+  const makePageImage = (page, index) => new Promise((resolve) => {
     const clone = page.cloneNode(true)
     clone.style.boxShadow = 'none'
     clone.style.margin = '0'
@@ -91,7 +91,12 @@ export default function WorksheetMaker() {
     }).join('\n')
     const markup = new XMLSerializer().serializeToString(clone)
     const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><foreignObject width="100%" height="100%"><div xmlns="http://www.w3.org/1999/xhtml"><style>${styles}</style>${markup}</div></foreignObject></svg>`
-    const url = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+    const svgBlob = new Blob([svg], { type: 'image/svg+xml;charset=utf-8' })
+    const svgUrl = URL.createObjectURL(svgBlob)
+    const resolveSvgFallback = () => {
+      const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.svg`
+      resolve({ name, file: new File([svgBlob], name, { type: svgBlob.type }), url: svgUrl, isFallback: true })
+    }
     const image = new Image()
     image.onload = () => {
       const scale = 2
@@ -99,20 +104,31 @@ export default function WorksheetMaker() {
       canvas.width = width * scale
       canvas.height = height * scale
       const context = canvas.getContext('2d')
-      context.scale(scale, scale)
-      context.drawImage(image, 0, 0)
-      canvas.toBlob((blob) => {
-        if (!blob) {
-          reject(new Error('画像データを作成できませんでした。'))
-          return
-        }
-        const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
-        const file = new File([blob], name, { type: 'image/png' })
-        resolve({ name, file, url: URL.createObjectURL(blob) })
-      }, 'image/png')
+      if (!context) {
+        resolveSvgFallback()
+        return
+      }
+      try {
+        context.scale(scale, scale)
+        context.drawImage(image, 0, 0)
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            resolveSvgFallback()
+            return
+          }
+          URL.revokeObjectURL(svgUrl)
+          const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
+          const file = new File([blob], name, { type: 'image/png' })
+          resolve({ name, file, url: URL.createObjectURL(blob) })
+        }, 'image/png')
+      } catch {
+        resolveSvgFallback()
+      }
     }
-    image.onerror = () => reject(new Error('画像を作成できませんでした。'))
-    image.src = url
+    image.onerror = () => {
+      resolveSvgFallback()
+    }
+    image.src = svgUrl
   })
   const exportImages = async (includeAnswers) => {
     setExportStatus('画像を作成しています...')
@@ -188,10 +204,15 @@ export default function WorksheetMaker() {
         {exportStatus ? <p>{exportStatus}</p> : <>
           <p>iPadでは、1まいずつ おして「画像を保存」を えらんでください。</p>
           <div className="worksheet-image-list">
-            {exportedImages.map((image, index) => <button className="btn btn-image-save" key={image.name} onClick={() => saveImage(image)}>
-              {navigator.share && navigator.canShare?.({ files: [image.file] }) ? <Share2 size={18} /> : <ExternalLink size={18} />}
-              {index + 1}まいめを ほぞん
-            </button>)}
+            {exportedImages.map((image, index) => <div className="worksheet-image-item" key={image.name}>
+              <img src={image.url} alt={`${index + 1}まいめの プレビュー`} />
+              <button className="btn btn-image-save" onClick={() => saveImage(image)}>
+                {navigator.share && navigator.canShare?.({ files: [image.file] }) ? <Share2 size={18} /> : <ExternalLink size={18} />}
+                {index + 1}まいめを ほぞん
+              </button>
+              <a href={image.url} target="_blank" rel="noreferrer">ひらいて ほぞん</a>
+              {image.isFallback && <small>Safariようの ほぞんがぞうです</small>}
+            </div>)}
           </div>
           <button className="btn" onClick={() => {
             exportedImages.forEach(({ url }) => URL.revokeObjectURL(url))
