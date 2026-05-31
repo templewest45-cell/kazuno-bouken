@@ -35,11 +35,13 @@ import ActivityS6Hunt from './pages/ActivityS6Hunt';
 import Profiles from './pages/Profiles';
 import CastleCollection from './pages/CastleCollection';
 import AppErrorBoundary from './pages/AppErrorBoundary';
+import KidsModeViewport from './components/KidsModeViewport';
 
 function App() {
   return (
     <BrowserRouter>
       <AppErrorBoundary>
+      <KidsModeViewport />
       <div className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />

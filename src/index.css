@@ -51,6 +51,68 @@ body {
   position: relative;
 }
 
+html.kids-mode-active,
+body.kids-mode-active {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.kids-mode-active {
+  position: fixed;
+  inset: 0;
+  touch-action: none;
+}
+
+body.kids-mode-active #root,
+body.kids-mode-active .app-container {
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  overflow: hidden;
+}
+
+.kids-landscape-prompt {
+  display: none;
+}
+
+@media (orientation: portrait) {
+  .kids-landscape-prompt {
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: linear-gradient(145deg, #86cfde, #78bd69);
+    color: white;
+    text-align: center;
+  }
+
+  .kids-landscape-prompt div {
+    display: flex;
+    max-width: 440px;
+    flex-direction: column;
+    gap: 14px;
+    padding: 30px;
+    border: 5px solid #fff4b1;
+    border-radius: 28px;
+    background: #4b855eee;
+    box-shadow: 0 9px 0 #326344;
+  }
+
+  .kids-landscape-prompt strong {
+    font-size: clamp(28px, 8vw, 42px);
+  }
+
+  .kids-landscape-prompt span {
+    font-size: clamp(17px, 4vw, 23px);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+}
+
 /* Premium Button Styles */
 .btn {
   display: inline-flex;

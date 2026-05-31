@@ -115,8 +115,7 @@
   position: relative;
   z-index: 1;
   width: min(1180px, 100%);
-  height: calc(100vh - 96px);
-  min-height: 690px;
+  height: calc(100dvh - 96px);
   margin: 0 auto;
   overflow: hidden;
   background: url('/assets/adventure-map-background-v1.png') center center / cover no-repeat;
@@ -299,8 +298,8 @@
   .map-header-button { min-width: 52px; min-height: 52px; padding: 9px 12px; }
   .map-header-button span { display: none; }
   .kids-map-logo { padding: 7px 13px; font-size: 18px; }
-  .kids-map-world { min-width: 690px; min-height: 660px; transform-origin: top left; }
-  .kids-map-page { overflow-x: auto; }
+  .kids-map-world { min-width: 690px; transform-origin: top left; }
+  .kids-map-page { overflow: hidden; }
   .kids-map-goal { right: 7%; }
   .map-progress { right: 12px; width: 620px; }
 }
