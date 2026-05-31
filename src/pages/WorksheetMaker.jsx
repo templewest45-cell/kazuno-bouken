@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Download, Printer, RefreshCcw } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Download, ExternalLink, Printer, RefreshCcw, Share2 } from 'lucide-react'
 import { makeWorksheet, WORKSHEET_TEMPLATES } from '../store/worksheetTemplates'
 import './WorksheetMaker.css'
 
@@ -62,7 +62,10 @@ export default function WorksheetMaker() {
   const [hints, setHints] = useState(true)
   const [printAnswers, setPrintAnswers] = useState(false)
   const [exportChoice, setExportChoice] = useState(null)
+  const [exportStatus, setExportStatus] = useState('')
+  const [exportedImages, setExportedImages] = useState([])
   const [worksheet, setWorksheet] = useState(() => makeWorksheet(['count'], 6, 5, true))
+  useEffect(() => () => exportedImages.forEach(({ url }) => URL.revokeObjectURL(url)), [exportedImages])
   const generate = () => setWorksheet(makeWorksheet(templateIds, count, max, hints))
   const toggleTemplate = (id) => {
     const next = templateIds.includes(id) ? templateIds.filter((value) => value !== id) : [...templateIds, id]
@@ -76,7 +79,7 @@ export default function WorksheetMaker() {
     setPrintAnswers(includeAnswers)
     window.setTimeout(() => window.print(), 0)
   }
-  const downloadPage = (page, index) => {
+  const makePageImage = (page, index) => new Promise((resolve, reject) => {
     const clone = page.cloneNode(true)
     clone.style.boxShadow = 'none'
     clone.style.margin = '0'
@@ -98,19 +101,52 @@ export default function WorksheetMaker() {
       const context = canvas.getContext('2d')
       context.scale(scale, scale)
       context.drawImage(image, 0, 0)
-      const link = document.createElement('a')
-      link.download = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
-      link.href = canvas.toDataURL('image/png')
-      link.click()
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error('画像データを作成できませんでした。'))
+          return
+        }
+        const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
+        const file = new File([blob], name, { type: 'image/png' })
+        resolve({ name, file, url: URL.createObjectURL(blob) })
+      }, 'image/png')
     }
-    image.onerror = () => {
+    image.onerror = () => reject(new Error('画像を作成できませんでした。'))
+    image.src = url
+  })
+  const exportImages = async (includeAnswers) => {
+    setExportStatus('画像を作成しています...')
+    exportedImages.forEach(({ url }) => URL.revokeObjectURL(url))
+    setExportedImages([])
+    const pages = document.querySelectorAll(`.worksheet-preview .print-page${includeAnswers ? '' : ':not(.answer-page)'}`)
+    try {
+      const images = []
+      for (const [index, page] of Array.from(pages).entries()) {
+        images.push(await makePageImage(page, index))
+      }
+      setExportedImages(images)
+      setExportStatus('')
+    } catch {
+      setExportStatus('')
       window.alert('がぞうを つくれませんでした。もういちど ためしてください。')
     }
-    image.src = url
   }
-  const exportImages = (includeAnswers) => {
-    const pages = document.querySelectorAll(`.worksheet-preview .print-page${includeAnswers ? '' : ':not(.answer-page)'}`)
-    pages.forEach((page, index) => downloadPage(page, index))
+  const saveImage = async ({ file, url, name }) => {
+    if (navigator.share && navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file], title: name })
+        return
+      } catch (error) {
+        if (error.name === 'AbortError') return
+      }
+    }
+    const link = document.createElement('a')
+    link.download = name
+    link.href = url
+    link.target = '_blank'
+    document.body.appendChild(link)
+    link.click()
+    link.remove()
   }
   const chooseExport = (includeAnswers) => {
     const action = exportChoice
@@ -144,6 +180,24 @@ export default function WorksheetMaker() {
         <button className="btn btn-primary" onClick={() => chooseExport(false)}>もんだいだけ</button>
         <button className="btn btn-secondary" onClick={() => chooseExport(true)}>こたえも いっしょ</button>
         <button className="btn" onClick={() => setExportChoice(null)}>やめる</button>
+      </div>
+    </div>}
+    {(exportStatus || exportedImages.length > 0) && <div className="worksheet-export-overlay" role="dialog" aria-modal="true" aria-labelledby="worksheet-image-title">
+      <div className="worksheet-export-dialog">
+        <h3 id="worksheet-image-title">がぞうで ほぞん</h3>
+        {exportStatus ? <p>{exportStatus}</p> : <>
+          <p>iPadでは、1まいずつ おして「画像を保存」を えらんでください。</p>
+          <div className="worksheet-image-list">
+            {exportedImages.map((image, index) => <button className="btn btn-image-save" key={image.name} onClick={() => saveImage(image)}>
+              {navigator.share && navigator.canShare?.({ files: [image.file] }) ? <Share2 size={18} /> : <ExternalLink size={18} />}
+              {index + 1}まいめを ほぞん
+            </button>)}
+          </div>
+          <button className="btn" onClick={() => {
+            exportedImages.forEach(({ url }) => URL.revokeObjectURL(url))
+            setExportedImages([])
+          }}>とじる</button>
+        </>}
       </div>
     </div>}
   </div>
