@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Download, ExternalLink, Printer, RefreshCcw, Share2 } from 'lucide-react'
+import { Download, ExternalLink, Printer, RefreshCcw } from 'lucide-react'
 import { makeWorksheet, WORKSHEET_TEMPLATES } from '../store/worksheetTemplates'
 import './WorksheetMaker.css'
 
@@ -98,8 +98,7 @@ export default function WorksheetMaker() {
       canvas.toBlob((result) => result ? resolve(result) : reject(new Error('画像データを作成できませんでした。')), 'image/png')
     })
     const name = `かずのぼうけん-${String(index + 1).padStart(2, '0')}.png`
-    const file = new File([blob], name, { type: 'image/png' })
-    return { name, file, url: URL.createObjectURL(blob) }
+    return { name, url: URL.createObjectURL(blob) }
   }
   const exportImages = async (includeAnswers) => {
     setExportStatus('画像を作成しています...')
@@ -117,23 +116,6 @@ export default function WorksheetMaker() {
       setExportStatus('')
       window.alert('がぞうを つくれませんでした。もういちど ためしてください。')
     }
-  }
-  const saveImage = async ({ file, url, name }) => {
-    if (navigator.share && navigator.canShare?.({ files: [file] })) {
-      try {
-        await navigator.share({ files: [file], title: name })
-        return
-      } catch (error) {
-        if (error.name === 'AbortError') return
-      }
-    }
-    const link = document.createElement('a')
-    link.download = name
-    link.href = url
-    link.target = '_blank'
-    document.body.appendChild(link)
-    link.click()
-    link.remove()
   }
   const chooseExport = (includeAnswers) => {
     const action = exportChoice
@@ -173,15 +155,13 @@ export default function WorksheetMaker() {
       <div className="worksheet-export-dialog">
         <h3 id="worksheet-image-title">がぞうで ほぞん</h3>
         {exportStatus ? <p>{exportStatus}</p> : <>
-          <p>iPadでは、1まいずつ おして「画像を保存」を えらんでください。</p>
+          <p>iPadでは、画像をひらいてから長押し、または共有メニューで保存してください。</p>
           <div className="worksheet-image-list">
             {exportedImages.map((image, index) => <div className="worksheet-image-item" key={image.name}>
               <img src={image.url} alt={`${index + 1}まいめの プレビュー`} />
-              <button className="btn btn-image-save" onClick={() => saveImage(image)}>
-                {navigator.share && navigator.canShare?.({ files: [image.file] }) ? <Share2 size={18} /> : <ExternalLink size={18} />}
-                {index + 1}まいめを ほぞん
-              </button>
-              <a href={image.url} target="_blank" rel="noreferrer">ひらいて ほぞん</a>
+              <a className="btn btn-image-save" href={image.url} target="_blank" rel="noreferrer">
+                <ExternalLink size={18} /> {index + 1}まいめを ひらく
+              </a>
             </div>)}
           </div>
           <button className="btn" onClick={() => {
