@@ -91,26 +91,53 @@
   }
 
   .s2-fill-complete {
-    gap: 5px !important;
+    position: fixed;
+    z-index: 20;
+    inset: 6px;
+    display: flex;
+    justify-content: center;
+    gap: 0 !important;
+    padding: 8px;
+    overflow: auto;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.96);
   }
 
-  .s2-fill-complete > img {
-    width: 50px !important;
-    height: 50px !important;
-  }
-
-  .s2-fill-complete > div {
-    font-size: 17px !important;
-  }
+  .s2-fill-complete > img,
+  .s2-fill-complete > div:not(.completion-result) { display: none; }
 
   .s2-fill-complete .completion-result {
+    width: min(760px, 96vw);
+    max-height: calc(100dvh - 28px);
     gap: 5px;
     padding: 6px;
+    overflow: auto;
     border-width: 3px;
     border-radius: 15px;
   }
 
   .s2-fill-complete .completion-result-title {
     font-size: 19px;
+  }
+
+  .s2-fill-complete .completion-result-rewards {
+    gap: 7px;
+    font-size: 14px;
+  }
+
+  .s2-fill-complete .completion-result-rewards span {
+    font-size: 18px;
+  }
+
+  .s2-fill-complete .completion-actions {
+    flex-wrap: nowrap;
+    gap: 7px;
+  }
+
+  .s2-fill-complete .completion-actions .btn {
+    min-width: 0;
+    min-height: 38px;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
   }
 }
