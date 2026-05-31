@@ -5,6 +5,7 @@ import { LogStore } from '../store/logStore';
 import { speak } from '../utils/speak';
 import { Settings } from '../store/settings';
 import CompletionActions from './CompletionActions';
+import './ActivityS1Count.css';
 
 const JP_NUMS = ['', 'いち', 'に', 'さん', 'よん', 'ご', 'ろく'];
 
@@ -137,6 +138,7 @@ export default function ActivityS1Count() {
 
   return (
     <div
+      className="s1-count-page"
       style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100vh', backgroundColor: '#FAFAFA' }}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -269,7 +271,7 @@ export default function ActivityS1Count() {
       )}
 
       {/* ── ボトムバー ── */}
-      <div style={{ padding: '16px 24px', borderTop: '1px solid #EEE', display: 'flex', justifyContent: 'center', gap: '16px', marginTop: 'auto' }}>
+      <div className={`s1-count-footer${phase === 'done' ? ' is-visible' : ''}`} style={{ padding: '16px 24px', borderTop: '1px solid #EEE', display: 'flex', justifyContent: 'center', gap: '16px', marginTop: 'auto' }}>
         {phase === 'done' && roundCount < maxQ && (
           <button
             className="btn btn-primary animate-pop-in"
