@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { unlockSpeech } from '../utils/speak';
 
 export default function KidsModeViewport() {
   const { pathname } = useLocation();
@@ -12,11 +13,15 @@ export default function KidsModeViewport() {
     const scrollY = window.scrollY;
     document.documentElement.classList.add('kids-mode-active');
     document.body.classList.add('kids-mode-active');
+    document.addEventListener('pointerdown', unlockSpeech, true);
+    document.addEventListener('touchstart', unlockSpeech, true);
     window.scrollTo(0, 0);
 
     return () => {
       document.documentElement.classList.remove('kids-mode-active');
       document.body.classList.remove('kids-mode-active');
+      document.removeEventListener('pointerdown', unlockSpeech, true);
+      document.removeEventListener('touchstart', unlockSpeech, true);
       window.scrollTo(scrollX, scrollY);
     };
   }, [isKidsMode]);

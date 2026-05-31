@@ -24,8 +24,7 @@ export default function ActivityS1Arrange() {
   const doneRef = useRef(false);
   const startTimeRef = useRef(Date.now());
 
-  const target = PROBLEMS[problemIdx];
-  const remaining = BOX_TOTAL - placed; // 箱に残っているりんご数
+  const target = PROBLEMS[problemIdx % PROBLEMS.length];
 
   const initProblem = useCallback((idx) => {
     setPlaced(0);
@@ -34,7 +33,7 @@ export default function ActivityS1Arrange() {
     setBouncingIdx(null);
     doneRef.current = false;
     startTimeRef.current = Date.now();
-    setTimeout(() => speak(`${JP_NUMS[PROBLEMS[idx]]}こ いれよう`), 300);
+    setTimeout(() => speak(`${JP_NUMS[PROBLEMS[idx % PROBLEMS.length]]}こ いれよう`), 300);
   }, []);
 
   useEffect(() => { initProblem(problemIdx); }, [problemIdx]);

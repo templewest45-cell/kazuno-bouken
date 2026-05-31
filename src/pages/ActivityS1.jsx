@@ -44,7 +44,7 @@ export default function ActivityS1() {
 
   // 問題初期化
   const initProblem = useCallback((idx) => {
-    const count = PROBLEMS[idx];
+    const count = PROBLEMS[idx % PROBLEMS.length];
     const shuffled = [...ANIMALS].sort(() => Math.random() - 0.5).slice(0, count);
     setAnimals(shuffled);
     setFedSet(new Set());
@@ -95,7 +95,7 @@ export default function ActivityS1() {
           speak(`ぜんぶで ${JP_NUMS[total]}こ！ すごい！`);
           setPhase('done');
           const nextRound = roundCount + 1;
-          setRoundCount(nextRound);
+          setRoundCount(current => current + 1);
           LogStore.addLog({
             stage: 'S1', activity: 'feed_animal',
             count: total, round: nextRound,

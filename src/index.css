@@ -62,7 +62,6 @@ body.kids-mode-active {
 body.kids-mode-active {
   position: fixed;
   inset: 0;
-  touch-action: none;
 }
 
 body.kids-mode-active #root,

@@ -41,7 +41,7 @@ export default function ActivityS1Count() {
   const ghostRef    = useRef(null);
   const doneRef     = useRef(false);             // 二重完了防止
 
-  const target = PROBLEMS[problemIdx].target;
+  const target = PROBLEMS[problemIdx % PROBLEMS.length].target;
 
   // 問題初期化
   const initProblem = useCallback((idx) => {
@@ -52,7 +52,7 @@ export default function ActivityS1Count() {
     setPopNum(null);
     doneRef.current = false;
     startTimeRef.current = Date.now();
-    const t = PROBLEMS[idx].target;
+    const t = PROBLEMS[idx % PROBLEMS.length].target;
     setTimeout(() => speak(`${randomAnimal.name}に ${JP_NUMS[t]}こ あげよう`), 300);
   }, []);
 
@@ -75,8 +75,7 @@ export default function ActivityS1Count() {
         doneRef.current = true;
         setTimeout(() => {
           setPhase('done');
-          const next = roundCount + 1;
-          setRoundCount(next);
+          setRoundCount(current => current + 1);
           speak(`できた！ ${JP_NUMS[target]}こ あげたね！ すごい！`);
           LogStore.addLog({
             stage: 'S1', activity: 'count_mark',
