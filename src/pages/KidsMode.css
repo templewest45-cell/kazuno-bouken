@@ -5,24 +5,6 @@
   background: linear-gradient(135deg, #86cfde 0%, #bce5b1 46%, #45789e 100%);
 }
 
-.kids-map-sky {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.kids-map-sky {
-  z-index: 0;
-  overflow: hidden;
-  background:
-    radial-gradient(circle at 67% 18%, #fff8d9aa 0 5%, transparent 20%),
-    linear-gradient(115deg, transparent 0 54%, rgba(32, 61, 143, 0.74) 100%);
-}
-
-.kids-map-cloud { position: absolute; opacity: 0.85; filter: drop-shadow(0 6px 2px #5d8fa533); }
-.cloud-one { top: 13%; left: 44%; font-size: 88px; }
-.cloud-two { top: 31%; left: 8%; font-size: 62px; opacity: 0.55; }
-.kids-map-stars { position: absolute; top: 12%; right: 8%; color: #ffef94; font-size: 35px; text-shadow: 0 0 16px #fff7c2; }
 .kids-map-goal {
   position: absolute;
   z-index: 4;

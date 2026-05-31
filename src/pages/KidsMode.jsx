@@ -34,12 +34,6 @@ export default function KidsMode() {
 
   return (
     <div className="kids-map-page">
-      <div className="kids-map-sky" aria-hidden="true">
-        <span className="kids-map-cloud cloud-one">☁️</span>
-        <span className="kids-map-cloud cloud-two">☁️</span>
-        <span className="kids-map-stars">★ ☆ ★</span>
-      </div>
-
       <header className="kids-map-header">
         <button className="btn map-header-button" onClick={() => navigate('/')}>
           <ArrowLeft size={24} /> <span>もどる</span>
