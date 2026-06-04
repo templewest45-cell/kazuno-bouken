@@ -4,6 +4,7 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { LogStore } from '../store/logStore';
 import { speak } from '../utils/speak';
 import { Settings } from '../store/settings';
+import { lockKidsScroll, unlockKidsScroll } from '../utils/scrollLock';
 import CompletionActions from './CompletionActions';
 import './ActivityS1Count.css';
 
@@ -43,6 +44,10 @@ export default function ActivityS1Count() {
   const doneRef     = useRef(false);             // 二重完了防止
 
   const target = PROBLEMS[problemIdx % PROBLEMS.length].target;
+
+  useEffect(() => {
+    return () => unlockKidsScroll();
+  }, []);
 
   // 問題初期化
   const initProblem = useCallback((idx) => {
@@ -106,6 +111,7 @@ export default function ActivityS1Count() {
   const handleTouchStart = (e, idx) => {
     if (phase !== 'feed') return;
     e.preventDefault();
+    lockKidsScroll();
     dragFoodRef.current = idx;
     const t = e.touches[0];
     const ghost = document.createElement('img');
@@ -127,11 +133,20 @@ export default function ActivityS1Count() {
     if (dragFoodRef.current === null && !ghostRef.current) return;
     e.preventDefault();
     if (ghostRef.current) { document.body.removeChild(ghostRef.current); ghostRef.current = null; }
-    if (dragFoodRef.current === null || phase !== 'feed') return;
+    if (dragFoodRef.current === null || phase !== 'feed') {
+      unlockKidsScroll();
+      return;
+    }
     const t = e.changedTouches[0];
     const el = document.elementFromPoint(t.clientX, t.clientY);
     if (el?.closest('[data-animal-drop]')) giveFood();
     dragFoodRef.current = null;
+    unlockKidsScroll();
+  };
+  const handleTouchCancel = () => {
+    if (ghostRef.current) { document.body.removeChild(ghostRef.current); ghostRef.current = null; }
+    dragFoodRef.current = null;
+    unlockKidsScroll();
   };
 
   if (!animal) return null;
@@ -142,6 +157,7 @@ export default function ActivityS1Count() {
       style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100vh', backgroundColor: '#FAFAFA' }}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
     >
       {/* ヘッダー */}
       <div style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #EEE' }}>

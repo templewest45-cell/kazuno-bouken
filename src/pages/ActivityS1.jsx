@@ -4,6 +4,7 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { LogStore } from '../store/logStore';
 import { speak } from '../utils/speak';
 import { Settings } from '../store/settings';
+import { lockKidsScroll, unlockKidsScroll } from '../utils/scrollLock';
 import CompletionActions from './CompletionActions';
 import './ActivityS1.css';
 
@@ -42,6 +43,10 @@ export default function ActivityS1() {
   // ── ドラッグ & タッチ状態 ──
   const dragFoodRef = useRef(null);
   const ghostRef = useRef(null);          // touch ghost element
+
+  useEffect(() => {
+    return () => unlockKidsScroll();
+  }, []);
 
   // 問題初期化
   const initProblem = useCallback((idx) => {
@@ -125,6 +130,7 @@ export default function ActivityS1() {
   const handleTouchStart = (e, foodIdx) => {
     if (phase !== 'feed') return;
     e.preventDefault();
+    lockKidsScroll();
     dragFoodRef.current = foodIdx;
     const t = e.touches[0];
     // ゴーストを作る
@@ -152,7 +158,10 @@ export default function ActivityS1() {
       document.body.removeChild(ghostRef.current);
       ghostRef.current = null;
     }
-    if (dragFoodRef.current === null || phase !== 'feed') return;
+    if (dragFoodRef.current === null || phase !== 'feed') {
+      unlockKidsScroll();
+      return;
+    }
     const t = e.changedTouches[0];
     // ドロップ先の動物を探す
     const el = document.elementFromPoint(t.clientX, t.clientY);
@@ -161,6 +170,16 @@ export default function ActivityS1() {
       feedAnimal(animalEl.dataset.animalKey);
     }
     dragFoodRef.current = null;
+    unlockKidsScroll();
+  };
+
+  const handleTouchCancel = () => {
+    if (ghostRef.current) {
+      document.body.removeChild(ghostRef.current);
+      ghostRef.current = null;
+    }
+    dragFoodRef.current = null;
+    unlockKidsScroll();
   };
 
   // まだ食べていない食べ物の数
@@ -172,6 +191,7 @@ export default function ActivityS1() {
       style={{ display: 'flex', flexDirection: 'column', flex: 1, minHeight: '100vh', backgroundColor: '#FAFAFA' }}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchCancel}
     >
       {/* ヘッダー */}
       <div className="s1-feed-header" style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', gap: '12px', borderBottom: '1px solid #EEE' }}>
