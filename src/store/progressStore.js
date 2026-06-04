@@ -6,13 +6,13 @@ const ACTIVE_KEY = 'kazu_active_profile'
 export const ACTIVITY_IDS = {
   feed_animal: 'S1_tap_move', count_mark: 'S1_count_mark', arrange_same: 'S1_arrange', which_more: 'S1_which_more',
   count_up_island_interactive: 'S2_together', fill_blank_train: 'S2_fill_blank', count_up_island_voice: 'S2_self', arrange_cards: 'S2_arrange_cards',
-  fill_blank_10: 'S3_fill_blank_10', continue: 'S3_continue', reverse: 'S3_reverse', before_after: 'S3_before_after', multi_blank: 'S3_multi_blank',
-  snack_number_match: 'S4_match', flash_card_read: 'S4_flash', number_to_quantity: 'S4_how_many', sort_number_cards: 'S4_sort',
+  fill_blank_5: 'S3_fill_blank_5', fill_blank_10: 'S3_fill_blank_10', continue_5: 'S3_continue_5', continue: 'S3_continue', reverse_5: 'S3_reverse_5', reverse: 'S3_reverse', before_after_5: 'S3_before_after_5', before_after: 'S3_before_after', multi_blank: 'S3_multi_blank',
+  snack_number_match_5: 'S4_match_5', snack_number_match: 'S4_match', flash_card_read: 'S4_flash', number_to_quantity_5: 'S4_how_many_5', number_to_quantity: 'S4_how_many', sort_number_cards: 'S4_sort',
   same_count_on_pans: 'S5_split', join_apples: 'S5_join', missing_apples: 'S5_missing_part', number_bonds: 'S5_number_bonds',
-  condition_hunt: 'S6_hunt', compare: 'S6_compare', numberline: 'S6_numberline', sort: 'S6_sort', between: 'S6_between',
+  condition_hunt_5: 'S6_hunt_5', condition_hunt: 'S6_hunt', compare_5: 'S6_compare_5', compare: 'S6_compare', numberline_5: 'S6_numberline_5', numberline: 'S6_numberline', sort: 'S6_sort', between_5: 'S6_between_5', between: 'S6_between',
 }
 
-const ONE_LOG_CLEAR = new Set(['S2_together', 'S2_self', 'S3_reverse', 'S3_multi_blank'])
+const ONE_LOG_CLEAR = new Set(['S2_together', 'S2_self', 'S3_reverse_5', 'S3_reverse', 'S3_multi_blank'])
 const ICONS = ['🌸', '🚀', '🍎', '⭐', '🌈', '🍬']
 export const STAGE_DECORATIONS = [
   null,
@@ -31,10 +31,10 @@ export const FOOTPRINT_DECORATIONS = [
 export const ACTIVITY_FLOW = {
   S1_tap_move: '/kids/s1', S1_count_mark: '/kids/s1/count', S1_arrange: '/kids/s1/arrange', S1_which_more: '/kids/s1/which',
   S2_together: '/kids/s2', S2_fill_blank: '/kids/s2/fill', S2_self: '/kids/s2/self', S2_arrange_cards: '/kids/s2/arrange',
-  S3_fill_blank_10: '/kids/s3/fill-10', S3_continue: '/kids/s3/continue', S3_reverse: '/kids/s3/reverse', S3_before_after: '/kids/s3/before-after', S3_multi_blank: '/kids/s3/multi-blank',
-  S4_match: '/kids/s4/match', S4_flash: '/kids/s4/flash', S4_how_many: '/kids/s4/how-many', S4_sort: '/kids/s4/sort',
+  S3_fill_blank_5: '/kids/s3/fill-5', S3_fill_blank_10: '/kids/s3/fill-10', S3_continue_5: '/kids/s3/continue-5', S3_continue: '/kids/s3/continue', S3_reverse_5: '/kids/s3/reverse-5', S3_reverse: '/kids/s3/reverse', S3_before_after_5: '/kids/s3/before-after-5', S3_before_after: '/kids/s3/before-after', S3_multi_blank: '/kids/s3/multi-blank',
+  S4_match_5: '/kids/s4/match-5', S4_match: '/kids/s4/match', S4_flash: '/kids/s4/flash', S4_how_many_5: '/kids/s4/how-many-5', S4_how_many: '/kids/s4/how-many', S4_sort: '/kids/s4/sort',
   S5_split: '/kids/s5/split', S5_join: '/kids/s5/join', S5_missing_part: '/kids/s5/missing', S5_number_bonds: '/kids/s5/bonds',
-  S6_hunt: '/kids/s6/hunt', S6_compare: '/kids/s6/compare', S6_numberline: '/kids/s6/numberline', S6_between: '/kids/s6/between',
+  S6_hunt_5: '/kids/s6/hunt-5', S6_hunt: '/kids/s6/hunt', S6_compare_5: '/kids/s6/compare-5', S6_compare: '/kids/s6/compare', S6_numberline_5: '/kids/s6/numberline-5', S6_numberline: '/kids/s6/numberline', S6_between_5: '/kids/s6/between-5', S6_between: '/kids/s6/between',
 }
 const ACTIVITY_ORDER = Object.keys(ACTIVITY_FLOW)
 const NEXT_ACTIVITY_ORDER = ACTIVITY_ORDER

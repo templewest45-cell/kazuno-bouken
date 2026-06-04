@@ -5,15 +5,15 @@ import { speak } from '../utils/speak'
 import { Settings } from '../store/settings'
 import { LogStore } from '../store/logStore'
 
-function makeProblem() {
-  const left = randomInt(1, 9)
-  let right = randomInt(1, 9)
-  while (right === left) right = randomInt(1, 9)
+function makeProblem(maxNumber) {
+  const left = randomInt(1, maxNumber)
+  let right = randomInt(1, maxNumber)
+  while (right === left) right = randomInt(1, maxNumber)
   return { left, right }
 }
 
-export default function ActivityS6Compare() {
-  const [problem, setProblem] = useState(makeProblem)
+export default function ActivityS6Compare({ maxNumber = 10, activityId = 'S6_compare', logActivity = 'compare' }) {
+  const [problem, setProblem] = useState(() => makeProblem(maxNumber))
   const [feedback, setFeedback] = useState('')
   const [count, setCount] = useState(0)
   const [complete, setComplete] = useState(false)
@@ -27,7 +27,7 @@ export default function ActivityS6Compare() {
       return
     }
     setFeedback('correct')
-    LogStore.addLog({ stage: 6, activity: 'compare', correct: true })
+    LogStore.addLog({ stage: 6, activity: logActivity, max: maxNumber, correct: true })
     speak(`${Math.max(problem.left, problem.right)}の ほうが おおきいね`)
   }
 
@@ -39,7 +39,7 @@ export default function ActivityS6Compare() {
       return
     }
     setCount(nextCount)
-    setProblem(makeProblem())
+    setProblem(makeProblem(maxNumber))
     setFeedback('')
   }
 
@@ -57,7 +57,7 @@ export default function ActivityS6Compare() {
         })}
       </div>
       <CastleFeedback state={feedback} correctText={`${Math.max(problem.left, problem.right)}の ほうが おおきいね！`} />
-      {feedback === 'correct' && <CastleFooter activityId="S6_compare" complete={complete} onNext={next} />}
+      {feedback === 'correct' && <CastleFooter activityId={activityId} complete={complete} onNext={next} />}
     </CastleLayout>
   )
 }

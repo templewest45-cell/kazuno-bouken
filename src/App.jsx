@@ -60,13 +60,19 @@ function App() {
           <Route path="/kids/s1/count" element={<ActivityS1Count />} />
           <Route path="/kids/s1/arrange" element={<ActivityS1Arrange />} />
           <Route path="/kids/s1/which" element={<ActivityS1Which />} />
+          <Route path="/kids/s3/continue-5" element={<ActivityS3Continue maxNumber={5} activityId="S3_continue_5" logActivity="continue_5" />} />
           <Route path="/kids/s3/continue" element={<ActivityS3Continue />} />
+          <Route path="/kids/s3/reverse-5" element={<ActivityS3Reverse startNumber={5} activityId="S3_reverse_5" logActivity="reverse_5" />} />
           <Route path="/kids/s3/reverse" element={<ActivityS3Reverse />} />
+          <Route path="/kids/s3/before-after-5" element={<ActivityS3BeforeAfter maxNumber={5} activityId="S3_before_after_5" logActivity="before_after_5" />} />
           <Route path="/kids/s3/before-after" element={<ActivityS3BeforeAfter />} />
           <Route path="/kids/s3/multi-blank" element={<ActivityS3MultiBlank />} />
+          <Route path="/kids/s3/fill-5" element={<ActivityS3FillBlank maxNumber={5} activityId="S3_fill_blank_5" logActivity="fill_blank_5" />} />
           <Route path="/kids/s3/fill-10" element={<ActivityS3FillBlank />} />
+          <Route path="/kids/s4/match-5" element={<ActivityS4Match maxNumber={5} activityId="S4_match_5" logActivity="snack_number_match_5" />} />
           <Route path="/kids/s4/match" element={<ActivityS4Match />} />
           <Route path="/kids/s4/flash" element={<ActivityS4Flash />} />
+          <Route path="/kids/s4/how-many-5" element={<ActivityS4HowMany maxNumber={5} activityId="S4_how_many_5" logActivity="number_to_quantity_5" />} />
           <Route path="/kids/s4/how-many" element={<ActivityS4HowMany />} />
           <Route path="/kids/s4/hunt" element={<ActivityS4Hunt />} />
           <Route path="/kids/s4/sort" element={<ActivityS4Sort />} />
@@ -74,9 +80,13 @@ function App() {
           <Route path="/kids/s5/join" element={<ActivityS5Join />} />
           <Route path="/kids/s5/missing" element={<ActivityS5Missing />} />
           <Route path="/kids/s5/bonds" element={<ActivityS5Bonds />} />
+          <Route path="/kids/s6/hunt-5" element={<ActivityS6Hunt maxNumber={5} activityId="S6_hunt_5" logActivity="condition_hunt_5" />} />
+          <Route path="/kids/s6/compare-5" element={<ActivityS6Compare maxNumber={5} activityId="S6_compare_5" logActivity="compare_5" />} />
           <Route path="/kids/s6/compare" element={<ActivityS6Compare />} />
+          <Route path="/kids/s6/numberline-5" element={<ActivityS6NumberLine maxNumber={5} activityId="S6_numberline_5" logActivity="numberline_5" />} />
           <Route path="/kids/s6/numberline" element={<ActivityS6NumberLine />} />
           <Route path="/kids/s6/sort" element={<ActivityS6Sort />} />
+          <Route path="/kids/s6/between-5" element={<ActivityS6Between maxNumber={5} activityId="S6_between_5" logActivity="between_5" />} />
           <Route path="/kids/s6/between" element={<ActivityS6Between />} />
           <Route path="/kids/s6/hunt" element={<ActivityS6Hunt />} />
         </Routes>

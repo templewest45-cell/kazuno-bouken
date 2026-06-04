@@ -17,8 +17,8 @@ export function shuffledCandies() {
   return [...CANDIES].sort(() => Math.random() - 0.5);
 }
 
-export function makeChoices(answer, count = 3) {
+export function makeChoices(answer, count = 3, min = 1, max = 10) {
   const choices = new Set([answer]);
-  while (choices.size < count) choices.add(Math.floor(Math.random() * 10) + 1);
+  while (choices.size < count) choices.add(Math.floor(Math.random() * (max - min + 1)) + min);
   return [...choices].sort(() => Math.random() - 0.5);
 }

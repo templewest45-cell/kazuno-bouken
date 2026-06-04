@@ -5,15 +5,15 @@ import { speak } from '../utils/speak'
 import { Settings } from '../store/settings'
 import { LogStore } from '../store/logStore'
 
-function makeProblem() {
-  const low = randomInt(1, 7)
+function makeProblem(maxNumber) {
+  const low = randomInt(1, maxNumber - 2)
   const high = low + 2
   const answer = low + 1
-  return { low, high, answer, choices: makeChoices(answer) }
+  return { low, high, answer, choices: makeChoices(answer, 1, maxNumber) }
 }
 
-export default function ActivityS6Between() {
-  const [problem, setProblem] = useState(makeProblem)
+export default function ActivityS6Between({ maxNumber = 10, activityId = 'S6_between', logActivity = 'between' }) {
+  const [problem, setProblem] = useState(() => makeProblem(maxNumber))
   const [feedback, setFeedback] = useState('')
   const [count, setCount] = useState(0)
   const [complete, setComplete] = useState(false)
@@ -26,7 +26,7 @@ export default function ActivityS6Between() {
       return
     }
     setFeedback('correct')
-    LogStore.addLog({ stage: 6, activity: 'between', correct: true })
+    LogStore.addLog({ stage: 6, activity: logActivity, max: maxNumber, correct: true })
     speak(`せいかい！ あいだの かずは ${problem.answer}`)
   }
 
@@ -38,7 +38,7 @@ export default function ActivityS6Between() {
       return
     }
     setCount(nextCount)
-    setProblem(makeProblem())
+    setProblem(makeProblem(maxNumber))
     setFeedback('')
   }
 
@@ -53,7 +53,7 @@ export default function ActivityS6Between() {
         {problem.choices.map((value) => <button className="castle-choice" key={value} onClick={() => choose(value)}>{value}</button>)}
       </div>
       <CastleFeedback state={feedback} correctText={`あいだの かずは ${problem.answer}！`} />
-      {feedback === 'correct' && <CastleFooter activityId="S6_between" complete={complete} onNext={next} />}
+      {feedback === 'correct' && <CastleFooter activityId={activityId} complete={complete} onNext={next} />}
     </CastleLayout>
   )
 }

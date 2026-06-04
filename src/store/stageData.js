@@ -108,6 +108,13 @@ export const STAGES = [
     activities: {
       basic: [
         {
+          id: 'S3_fill_blank_5',
+          title: '5までの穴あき数列',
+          desc: '1〜5の数列で、空いている場所に入る数字を選ぶ',
+          path: '/kids/s3/fill-5',
+          implemented: true,
+        },
+        {
           id: 'S3_fill_blank_10',
           title: '10までの穴あき数列',
           desc: '1〜10の数列を見て、空いている場所に入る数字を選ぶ',
@@ -115,10 +122,24 @@ export const STAGES = [
           implemented: true,
         },
         {
+          id: 'S3_continue_5',
+          title: '5までの つづきの数',
+          desc: '1〜5の範囲で「つぎの数」を選ぶ',
+          path: '/kids/s3/continue-5',
+          implemented: true,
+        },
+        {
           id: 'S3_continue',
           title: '途中から続けよう',
           desc: '「4のつぎは？」と問い、後に起点をランダムに',
           path: '/kids/s3/continue',
+          implemented: true,
+        },
+        {
+          id: 'S3_reverse_5',
+          title: '5から逆に数えよう',
+          desc: '5から1へ、逆順に数える',
+          path: '/kids/s3/reverse-5',
           implemented: true,
         },
         {
@@ -130,6 +151,13 @@ export const STAGES = [
         },
       ],
       advanced: [
+        {
+          id: 'S3_before_after_5',
+          title: '5までの前の数・後の数',
+          desc: '1〜5の範囲で、前後の数を数字カードから選ぶ',
+          path: '/kids/s3/before-after-5',
+          implemented: true,
+        },
         {
           id: 'S3_before_after',
           title: '前の数・後の数',
@@ -162,6 +190,13 @@ export const STAGES = [
     activities: {
       basic: [
         {
+          id: 'S4_match_5',
+          title: 'おかしは なんこ？ 5まで',
+          desc: '5個までのおかしを数えて、数字カードを空欄へドラッグする',
+          path: '/kids/s4/match-5',
+          implemented: true,
+        },
+        {
           id: 'S4_match',
           title: 'おかしは なんこ？',
           desc: 'おかしを数えて、数字カードを空欄へドラッグする',
@@ -177,6 +212,13 @@ export const STAGES = [
         },
       ],
       advanced: [
+        {
+          id: 'S4_how_many_5',
+          title: 'この数字は いくつ？ 5まで',
+          desc: '5までの数字カードを見て、同じ数のおかしを選ぶ',
+          path: '/kids/s4/how-many-5',
+          implemented: true,
+        },
         {
           id: 'S4_how_many',
           title: 'この すうじは いくつ？',
@@ -256,6 +298,13 @@ export const STAGES = [
     activities: {
       basic: [
         {
+          id: 'S6_hunt_5',
+          title: '5までの条件に合う数',
+          desc: '1〜5の範囲で、条件に合う数字を見つける',
+          path: '/kids/s6/hunt-5',
+          implemented: true,
+        },
+        {
           id: 'S6_hunt',
           title: 'じょうけんに あう かずを さがそう',
           desc: '「5より大きい数」など、条件に合う数字を見つける',
@@ -263,10 +312,24 @@ export const STAGES = [
           implemented: true,
         },
         {
+          id: 'S6_compare_5',
+          title: '5までの大きい数はどっち？',
+          desc: '1〜5の範囲で、2つの数を比べる',
+          path: '/kids/s6/compare-5',
+          implemented: true,
+        },
+        {
           id: 'S6_compare',
           title: '大小比較（2択）',
           desc: '2つの数を見て大きい方・小さい方をタップ',
           path: '/kids/s6/compare',
+          implemented: true,
+        },
+        {
+          id: 'S6_numberline_5',
+          title: '5までの数の道',
+          desc: '1〜5の数直線で、正しい位置に数字カードを置く',
+          path: '/kids/s6/numberline-5',
           implemented: true,
         },
         {
@@ -278,6 +341,13 @@ export const STAGES = [
         },
       ],
       advanced: [
+        {
+          id: 'S6_between_5',
+          title: '5までの間の数',
+          desc: '1〜5の範囲で、2つの数の間に入る数を選ぶ',
+          path: '/kids/s6/between-5',
+          implemented: true,
+        },
         {
           id: 'S6_between',
           title: '□に入る数は？',

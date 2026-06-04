@@ -8,16 +8,17 @@ import { shuffledCandies } from './activityS4Utils';
 import './ActivityS4Match.css';
 import CompletionActions from './CompletionActions';
 
-export default function ActivityS4Match() {
+export default function ActivityS4Match({ maxNumber = 10, activityId = 'S4_match', logActivity = 'snack_number_match' }) {
   const navigate = useNavigate();
   const maxQ = Settings.get().questionsPerRound;
-  const [snacks, setSnacks] = useState(shuffledCandies);
+  const makeSnacks = () => shuffledCandies().filter((snack) => snack.count <= maxNumber);
+  const [snacks, setSnacks] = useState(makeSnacks);
   const [round, setRound] = useState(0);
   const [phase, setPhase] = useState('play');
   const [wrong, setWrong] = useState(null);
   const snack = snacks[round % snacks.length];
 
-  const reset = () => { setSnacks(shuffledCandies()); setRound(0); setPhase('play'); setWrong(null); };
+  const reset = () => { setSnacks(makeSnacks()); setRound(0); setPhase('play'); setWrong(null); };
   const choose = (number) => {
     if (phase !== 'play') return;
     if (number !== snack.count) {
@@ -25,7 +26,7 @@ export default function ActivityS4Match() {
     }
     setPhase('correct');
     speak(`せいかい！ ${snack.name}は ${number}こ`);
-    LogStore.addLog({ stage: 'S4', activity: 'snack_number_match', snack: snack.name, count: number, correct: true });
+    LogStore.addLog({ stage: 'S4', activity: logActivity, snack: snack.name, count: number, max: maxNumber, correct: true });
   };
   const drop = (event) => { event.preventDefault(); choose(Number(event.dataTransfer.getData('text/plain'))); };
   const next = () => {
@@ -51,12 +52,12 @@ export default function ActivityS4Match() {
           </div>
         </div>
         <div className="candy-count-guide">{phase === 'correct' ? <span className="candy-count-feedback">⭐ せいかい！ ⭐</span> : 'すうじカードを ？ へ はこぼう！ タップでも えらべるよ'}</div>
-        <div className="candy-number-tray">{Array.from({ length: 10 }, (_, index) => index + 1).map((number) =>
+        <div className="candy-number-tray">{Array.from({ length: maxNumber }, (_, index) => index + 1).map((number) =>
           <button key={number} draggable={phase === 'play'} onDragStart={(event) => event.dataTransfer.setData('text/plain', String(number))}
             className={`candy-number-card${wrong === number ? ' is-wrong' : ''}`} onClick={() => choose(number)}>{number}</button>)}</div>
       </>}
     </main>
     <footer className="candy-count-footer">{phase === 'correct' && <button className="btn btn-primary" onClick={next}>{round + 1 >= maxQ ? 'けっかを みる' : 'つぎへ！'}</button>}
-      {phase === 'complete' && <CompletionActions activityId="S4_match" onRestart={reset} stagePath="/kids" />}</footer>
+      {phase === 'complete' && <CompletionActions activityId={activityId} onRestart={reset} stagePath="/kids" />}</footer>
   </div>;
 }
